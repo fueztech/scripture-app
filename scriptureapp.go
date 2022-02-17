@@ -8,7 +8,7 @@ import (
 )
 
 func ourFeelings() []string {
-	var variousMoods = []string{"Happy", "Sad", "Mad", "Anxious"}
+	var variousMoods = []string{"Happy", "Sad", "Mad", "Anxious", "Resentful"}
 	fmt.Println(variousMoods)
 
 	return variousMoods
@@ -20,6 +20,18 @@ func greetUsers() {
 	fmt.Printf("These are the selections you an choose from: %v\n", ourFeelings())
 	fmt.Printf("Using one word, how are you feeling today about life?:")
 
+}
+
+func peaceScriptures() {
+	peacefulScriptures := []string{
+		"Psalms 4:4",
+		"Proverbs 19:11",
+		"Ephesians 4:26",
+		"James 1:19",
+	}
+
+	makepeace := peacefulScriptures[rand.Intn(len(peacefulScriptures))]
+	fmt.Printf("Your Weekly Scripture:%v\n", makepeace)
 }
 
 func main() {
@@ -80,21 +92,23 @@ func main() {
 		fmt.Scan(&moodToday)
 
 		isValidInput := len(moodToday) >= 3
-		isValidEmotion := strings.Contains(moodToday, "Happy") || strings.Contains(moodToday, "Uncertain") || strings.Contains(moodToday, "Mad") || strings.Contains(moodToday, "Sad")
+		isValidEmotion := strings.Contains(moodToday, "Happy") || strings.Contains(moodToday, "Uncertain") || strings.Contains(moodToday, "Mad") || strings.Contains(moodToday, "Sad") || strings.Contains(moodToday, "Resentful")
 
 		if !isValidInput || !isValidEmotion {
 			fmt.Println("You made an incorrect emotion selection, please try again.")
 			continue
 		}
 
-		if moodToday == "Mad" {
+		if moodToday == "Anxious" {
+			fmt.Println("Your Weekly Scripture:", anxiousScriptures[rand.Intn(len(anxiousScriptures))])
+		} else if moodToday == "Mad" {
 			fmt.Println("Your Weekly Scripture:", angerScriptures[rand.Intn(len(angerScriptures))])
-		} else if moodToday == "Uncertain" {
-			fmt.Println("Your Weekly Scripture:", anxiousScriptures[rand.Intn(len(angerScriptures))])
 		} else if moodToday == "Happy" {
 			fmt.Println("Your Weekly Scripture:", happyScriptures[rand.Intn(len(happyScriptures))])
 		} else if moodToday == "Sad" {
 			fmt.Println("Your Weekly Scripture:", comfortScriptures[rand.Intn(len(comfortScriptures))])
+		} else if moodToday == "Resentful" {
+			peaceScriptures()
 		}
 		break
 	}
